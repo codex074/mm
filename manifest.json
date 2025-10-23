@@ -1,11 +1,11 @@
 {
-  "name": "Money Tracker - แอปบันทึกรายรับ-รายจ่าย",
+  "name": "Money Tracker",
   "short_name": "Money Tracker",
-  "description": "เว็บแอปพลิเคชันสำหรับบันทึกและจัดการข้อมูลทางการเงินส่วนบุคคล",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4f46e5",
+  "description": "แอปบันทึกรายรับ-รายจ่ายส่วนตัว",
   "icons": [
     {
       "src": "icons/icon-192x192.png",
@@ -13,7 +13,7 @@
       "type": "image/png"
     },
     {
-      "src": "icons/icon-512x512.png",
+      "src": "path/to/your/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
