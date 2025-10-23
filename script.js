@@ -88,12 +88,19 @@ const switchView = (viewName) => {
     });
     const activeLink = document.querySelector(`.nav-link[data-view="${viewName}"]`);
     document.getElementById('view-title').textContent = activeLink ? activeLink.querySelector('.sidebar-text').textContent.trim() : 'ภาพรวม';
+    
+    // Updated code for mobile menu closing
     if (window.innerWidth < 768) {
         const sidebar = document.getElementById('sidebar');
-        if(!sidebar.classList.contains('-translate-x-full')) {
-            sidebar.classList.add('-translate-x-full');
-        }
+        const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+        
+        sidebar.classList.add('-translate-x-full');
+        sidebarBackdrop.classList.add('opacity-0');
+        setTimeout(() => {
+            sidebarBackdrop.classList.add('hidden');
+        }, 300);
     }
+    
     if(viewName === 'reports') renderReports();
 };
 const populateSelect = (id, data, options = {}) => {
@@ -599,10 +606,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('main-nav').addEventListener('click', e => { const link = e.target.closest('.nav-link'); if (link) { e.preventDefault(); switchView(link.dataset.view); } });
-    document.getElementById('menu-button').addEventListener('click', () => {
-        sidebar.classList.toggle('-translate-x-full');
-    });
     
+    // Updated code for mobile menu and backdrop
+    const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+    document.getElementById('menu-button').addEventListener('click', () => {
+        sidebar.classList.remove('-translate-x-full');
+        sidebarBackdrop.classList.remove('hidden');
+        setTimeout(() => {
+            sidebarBackdrop.classList.remove('opacity-0');
+        }, 10);
+    });
+
+    sidebarBackdrop.addEventListener('click', () => {
+        sidebar.classList.add('-translate-x-full');
+        sidebarBackdrop.classList.add('opacity-0');
+        setTimeout(() => {
+            sidebarBackdrop.classList.add('hidden');
+        }, 300);
+    });
+
     const authContainer = document.getElementById('auth-container');
     const appContainer = document.getElementById('app');
     onAuthStateChanged(auth, user => {
